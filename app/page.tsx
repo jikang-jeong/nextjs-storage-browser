@@ -11,17 +11,7 @@ import config from "../amplify_outputs.json";
 Amplify.configure(config);
 
 function Example() {
-  const authAdapter = createAmplifyAuthAdapter({
-    options: {
-      defaultPrefixes: [
-        "media-readwritedelete/",
-        "media-readonly/",
-        "shared-folder-readwrite/",
-        (identityId) => `protected-useronlyreadwritedelete/${identityId}/`,
-        (identityId) => `private-useronlyreadwritedelete/${identityId}/`,
-      ],
-    },
-  });
+  const authAdapter = createAmplifyAuthAdapter();
 
   const { StorageBrowser } = createStorageBrowser();
 
