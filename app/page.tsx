@@ -6,8 +6,7 @@ import { signOut } from "aws-amplify/auth";
 import { Button, withAuthenticator } from "@aws-amplify/ui-react";
 import {
   createStorageBrowser,
-  createAmplifyAuthAdapter,
-  elementsDefault,
+  createAmplifyAuthAdapter 
 } from "@aws-amplify/ui-react-storage/browser";
 import "@aws-amplify/ui-react-storage/styles.css"; 
 import config from "../amplify_outputs.json";
