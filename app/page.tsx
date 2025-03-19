@@ -4,7 +4,7 @@ import { Amplify } from "aws-amplify";
 import { signOut } from "aws-amplify/auth";
 import { Button, withAuthenticator } from "@aws-amplify/ui-react";
 import { createStorageBrowser, createAmplifyAuthAdapter } from "@aws-amplify/ui-react-storage/browser";
-import { elementElements } from "./elementElements"; // 커스텀 UI 요소 파일
+import { elementsElements } from "./elementsElements"; // 커스텀 UI 요소 파일
 import "@aws-amplify/ui-react-storage/styles.css";
 import config from "../amplify_outputs.json";
 
@@ -27,7 +27,7 @@ function Example() {
   // 스토리지 브라우저 생성: customElements를 사용합니다.
   const { StorageBrowser } = createStorageBrowser({
     authAdapter,
-    elements: elementElements,
+    elements: elementsElements,
   });
 
   return (
