@@ -1,13 +1,17 @@
 'use client';
-export const dynamic = "force-dynamic";  // 정적 프리렌더링 비활성화
-
 import React from "react";
 import { Amplify } from "aws-amplify";
 import { signOut } from "aws-amplify/auth";
+
 import { Button, withAuthenticator } from "@aws-amplify/ui-react";
-import { createStorageBrowser, createAmplifyAuthAdapter } from "@aws-amplify/ui-react-storage/browser";
-import { elementsDefault } from "./elementsDefault"; // 파일 이름: elementsDefault.tsx
+import {
+  createStorageBrowser,
+  createAmplifyAuthAdapter,
+  elementsDefault,
+} from "@aws-amplify/ui-react-storage/browser";
 import "@aws-amplify/ui-react-storage/styles.css";
+import "@aws-amplify/ui-react-storage/storage-browser-styles.css";
+
 import config from "../amplify_outputs.json";
 
 Amplify.configure(config);
@@ -43,6 +47,5 @@ function Example() {
     </>
   );
 }
-
 
 export default withAuthenticator(Example);
