@@ -3,19 +3,27 @@ backend:
   phases:
     build:
       commands:
+        - echo "🧹 Cleaning node_modules and lock file..."
         - rm -rf node_modules package-lock.json
+        - echo "📦 Installing dependencies with force and legacy-peer-deps..."
         - npm install --force --legacy-peer-deps --cache .npm --prefer-offline
+        - echo "⚙️ Installing AWS CDK libraries..."
         - npm install aws-cdk-lib constructs
-        - npm install @aws-amplify/core @aws-amplify/auth @aws-amplify/ui-react @aws-amplify/ui
+        - echo "✅ Installing Amplify UI libraries with forced resolution..."
+        - npm install @aws-amplify/ui@5.9.0 @aws-amplify/ui-react@5.3.3 --force --legacy-peer-deps
+        - echo "🚀 Running Amplify pipeline deploy..."
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
     preBuild:
       commands:
+        - echo "🧹 Cleaning frontend node_modules and lock file..."
         - rm -rf node_modules package-lock.json
+        - echo "📦 Installing frontend dependencies with force and legacy-peer-deps..."
         - npm install --force --legacy-peer-deps --cache .npm --prefer-offline
     build:
       commands:
+        - echo "⚒️ Building Next.js app..."
         - npm run build
   artifacts:
     baseDirectory: .next
