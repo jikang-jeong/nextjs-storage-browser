@@ -11,9 +11,9 @@ import config from "../amplify_outputs.json";
 Amplify.configure(config);
 
 function Example() {
-  const authAdapter = createAmplifyAuthAdapter();
+  const authAdapter = createAmplifyAuthAdapter({});
 
-  const { StorageBrowser } = createStorageBrowser();
+  const { StorageBrowser } = createStorageBrowser({ authAdapter });
 
   return (
     <>
@@ -26,7 +26,7 @@ function Example() {
       >
         Sign Out
       </Button>
-      <StorageBrowser authAdapter={authAdapter} />
+      <StorageBrowser />
     </>
   );
 }
