@@ -11,18 +11,24 @@ import config from "../amplify_outputs.json";
 Amplify.configure(config);
 
 function Example() {
-  const authAdapter = createAmplifyAuthAdapter({});
-
-  const { StorageBrowser } = createStorageBrowser({ authAdapter });
+  const authAdapter = createAmplifyAuthAdapter();
+  const { StorageBrowser } = createStorageBrowser({
+    authAdapter,
+    listPrefixes: [
+      "media-readwritedelete/",
+      "media-readonly/",
+      "shared-folder-readwrite/",
+      (identityId: string) => `protected-useronlyreadwritedelete/${identityId}/`,
+      (identityId: string) => `private-useronlyreadwritedelete/${identityId}/`
+    ]
+  });
 
   return (
     <>
       <Button
         marginBlockEnd="xl"
         size="small"
-        onClick={() => {
-          signOut();
-        }}
+        onClick={() => signOut()}
       >
         Sign Out
       </Button>
