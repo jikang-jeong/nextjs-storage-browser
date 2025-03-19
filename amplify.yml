@@ -9,8 +9,8 @@ backend:
         - npm install --force --legacy-peer-deps --cache .npm --prefer-offline
         - echo "⚙️ Installing AWS CDK libraries..."
         - npm install aws-cdk-lib constructs
-        - echo "✅ Installing Amplify UI libraries with forced resolution..."
-        - npm install @aws-amplify/ui@5.9.0 @aws-amplify/ui-react@5.3.3 --force --legacy-peer-deps
+        - echo "✅ Installing Amplify UI & core libraries with forced resolution..."
+        - npm install aws-amplify@5.3.27 @aws-amplify/ui@5.9.0 @aws-amplify/ui-react@5.3.3 @aws-amplify/storage@6.6.8 --force --legacy-peer-deps
         - echo "🚀 Running Amplify pipeline deploy..."
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
