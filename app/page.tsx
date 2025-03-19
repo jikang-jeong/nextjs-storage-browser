@@ -3,6 +3,7 @@ import React from "react";
 import { Amplify } from "aws-amplify";
 import { signOut } from "aws-amplify/auth";
 
+import { getCurrentUser } from "aws-amplify/auth";
 import { Button, withAuthenticator } from "@aws-amplify/ui-react";
 import {
   createStorageBrowser,
@@ -17,6 +18,12 @@ import config from "../amplify_outputs.json";
 Amplify.configure(config);
 
 function Example() {
+
+// App 시작 시 또는 Example 함수 내부에서 테스트:
+getCurrentUser()
+  .then(user => console.log("Current user:", user))
+  .catch(err => console.log("No user signed in:", err));
+
   const { StorageBrowser } = createStorageBrowser({
     elements: elementsDefault,
     config: createAmplifyAuthAdapter({
