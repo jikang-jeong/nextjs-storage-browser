@@ -18,17 +18,17 @@ export const FileList = ({ files, onSelect }: { files?: Array<{ name: string }>;
   );
 };
 
-// 파일 업로드 버튼
+// 파일 업로드 버튼: 파일 업로드 동작을 트리거합니다.
 export const FileUploadButton = ({ onUpload }: { onUpload: () => void }) => {
   return <button onClick={onUpload}>Upload File</button>;
 };
 
-// 파일 삭제 버튼
+// 파일 삭제 버튼: 선택된 파일들을 삭제합니다.
 export const FileDeleteButton = ({ onDelete }: { onDelete: () => void }) => {
   return <button onClick={onDelete}>Delete Selected</button>;
 };
 
-// 폴더 생성 버튼
+// 폴더 생성 버튼: 새로운 폴더를 생성하는 동작을 처리합니다.
 export const FolderCreateButton = ({ onCreateFolder }: { onCreateFolder: () => void }) => {
   return <button onClick={onCreateFolder}>Create Folder</button>;
 };
