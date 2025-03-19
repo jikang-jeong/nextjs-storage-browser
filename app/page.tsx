@@ -13,25 +13,36 @@ import config from "../amplify_outputs.json";
 Amplify.configure(config);
 
 function Example() {
-  const authAdapter = createAmplifyAuthAdapter();
   const { StorageBrowser } = createStorageBrowser({
-    listPrefixes: [
-      "media-readwritedelete/",
-      "media-readonly/",
-      "shared-folder-readwrite/",
-      (identityId: string) => `protected-useronlyreadwritedelete/${identityId}/`,
-      (identityId: string) => `private-useronlyreadwritedelete/${identityId}/`,
-    ]
+    elements: elementsDefault,
+    config: createAmplifyAuthAdapter({
+      options: {
+        defaultPrefixes: [
+          "media-readwritedelete/",
+          "media-readonly/",
+          "shared-folder-readwrite/",
+          (identityId: string) => `protected-useronlyreadwritedelete/${identityId}/`,
+          (identityId: string) => `private-useronlyreadwritedelete/${identityId}/`,
+        ],
+      },
+    }),
   });
 
   return (
     <>
-      <Button marginBlockEnd="xl" size="small" onClick={() => signOut()}>
+      <Button
+        marginBlockEnd="xl"
+        size="small"
+        onClick={() => {
+          signOut();
+        }}
+      >
         Sign Out
       </Button>
-      <StorageBrowser authAdapter={authAdapter} elements={elementsDefault} />
+      <StorageBrowser />
     </>
   );
 }
+
 
 export default withAuthenticator(Example);
