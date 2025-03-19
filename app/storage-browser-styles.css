@@ -1,0 +1,14 @@
+.amplify-storage-item {
+  border: 1px solid #ddd;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+.amplify-storage-item input[type='checkbox'] {
+  margin-right: 10px;
+}
+
+.amplify-storage-item:hover {
+  background-color: #f9f9f9;
+}
