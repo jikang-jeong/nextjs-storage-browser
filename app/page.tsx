@@ -4,14 +4,13 @@ import { Amplify } from "aws-amplify";
 import { signOut } from "aws-amplify/auth";
 import { Button, withAuthenticator } from "@aws-amplify/ui-react";
 import { createStorageBrowser, createAmplifyAuthAdapter } from "@aws-amplify/ui-react-storage/browser";
-import { customElements } from "./customElements"; // 커스텀 UI 요소 파일
+import { customElements } from "./customElements"; // customElements.tsx 파일 (JSX 포함된 파일로 확장자 .tsx 사용 권장)
 import "@aws-amplify/ui-react-storage/styles.css";
 import config from "../amplify_outputs.json";
 
 Amplify.configure(config);
 
 function Example() {
-  // 인증 어댑터 생성
   const authAdapter = createAmplifyAuthAdapter({
     options: {
       defaultPrefixes: [
@@ -24,10 +23,9 @@ function Example() {
     },
   });
 
-  // 스토리지 브라우저 생성: customElements를 사용합니다.
   const { StorageBrowser } = createStorageBrowser({
     authAdapter,
-    elements: customElements,
+    elements: customElements as any, // 강제 캐스팅하여 타입 오류를 우회합니다.
   });
 
   return (
