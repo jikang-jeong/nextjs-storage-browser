@@ -10,7 +10,7 @@ import {
   elementsDefault,
 } from "@aws-amplify/ui-react-storage/browser";
 import "@aws-amplify/ui-react-storage/styles.css";
-import "@aws-amplify/ui-react-storage/storage-browser-styles.css";
+#import "@aws-amplify/ui-react-storage/storage-browser-styles.css";
 
 import config from "../amplify_outputs.json";
 
