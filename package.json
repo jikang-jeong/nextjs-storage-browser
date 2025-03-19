@@ -28,6 +28,5 @@
     "aws-cdk": "^2.1005.0"
   },
   "files": [
-    "./app/storage-browser-styles.css"
-  ]
-}
+    "app/storage-browser-styles.css"
+  ]}
