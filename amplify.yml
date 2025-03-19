@@ -6,7 +6,7 @@ backend:
         - echo "🧹 Cleaning node_modules and lock file..."
         - rm -rf node_modules package-lock.json
         - echo "📦 Installing dependencies with force and legacy-peer-deps..."
-        - npm install --force --legacy-peer-deps --cache .npm --prefer-offline
+        - npm ci --force --legacy-peer-deps --cache .npm --prefer-offline
         - echo "⚙️ Installing AWS CDK libraries..."
         - npm install aws-cdk-lib constructs
         - echo "✅ Installing Amplify UI & core libraries with forced resolution..."
@@ -20,7 +20,7 @@ frontend:
         - echo "🧹 Cleaning frontend node_modules and lock file..."
         - rm -rf node_modules package-lock.json
         - echo "📦 Installing frontend dependencies with force and legacy-peer-deps..."
-        - npm install --force --legacy-peer-deps --cache .npm --prefer-offline
+        - npm ci --force --legacy-peer-deps --cache .npm --prefer-offline
     build:
       commands:
         - echo "⚒️ Building Next.js app..."
