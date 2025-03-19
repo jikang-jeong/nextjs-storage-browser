@@ -26,5 +26,8 @@
     "aws-cdk-lib": "^2.184.1",
     "constructs": "^10.4.2",
     "aws-cdk": "^2.1005.0"
-  }
+  },
+  "files": [
+    "./app/storage-browser-styles.css"
+  ]
 }
