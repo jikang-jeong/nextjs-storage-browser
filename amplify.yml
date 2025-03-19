@@ -6,6 +6,7 @@ backend:
         - rm -rf node_modules package-lock.json
         - npm install --force --legacy-peer-deps --cache .npm --prefer-offline
         - npm install aws-cdk-lib constructs
+        - npm install @aws-amplify/core @aws-amplify/auth @aws-amplify/ui-react @aws-amplify/ui
         - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
