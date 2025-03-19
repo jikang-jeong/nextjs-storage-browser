@@ -11,19 +11,19 @@ import config from "../amplify_outputs.json";
 Amplify.configure(config);
 
 function Example() {
-  const { StorageBrowser } = createStorageBrowser({
-    config: createAmplifyAuthAdapter({
-      options: {
-        defaultPrefixes: [
-          "media-readwritedelete/",
-          "media-readonly/",
-          "shared-folder-readwrite/",
-          (identityId) => `protected-useronlyreadwritedelete/${identityId}/`,
-          (identityId) => `private-useronlyreadwritedelete/${identityId}/`,
-        ],
-      },
-    }),
+  const authAdapter = createAmplifyAuthAdapter({
+    options: {
+      defaultPrefixes: [
+        "media-readwritedelete/",
+        "media-readonly/",
+        "shared-folder-readwrite/",
+        (identityId) => `protected-useronlyreadwritedelete/${identityId}/`,
+        (identityId) => `private-useronlyreadwritedelete/${identityId}/`,
+      ],
+    },
   });
+
+  const { StorageBrowser } = createStorageBrowser();
 
   return (
     <>
@@ -36,7 +36,7 @@ function Example() {
       >
         Sign Out
       </Button>
-      <StorageBrowser />
+      <StorageBrowser authAdapter={authAdapter} />
     </>
   );
 }
