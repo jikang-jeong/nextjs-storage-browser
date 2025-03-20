@@ -16,7 +16,7 @@ const extendedConfig: any = {
   // 위치별 자격 증명을 빈 객체로 처리
   getLocationCredentials: () => Promise.resolve({}),
   // region은 auth 설정의 aws_region을 사용 (존재하지 않으면 'us-east-1'로 기본 설정)
-  region: config.auth?.aws_region || "us-east-1",
+  region: config.auth?.aws_region || "us-west-2",
   // registerAuthListener는 아무 동작도 하지 않는 함수로 처리합니다.
   registerAuthListener: () => () => {},
 };
