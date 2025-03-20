@@ -4,14 +4,17 @@ import { Amplify } from "aws-amplify";
 import { signOut } from "aws-amplify/auth";
 import { Button, withAuthenticator } from "@aws-amplify/ui-react";
 import { createStorageBrowser, createAmplifyAuthAdapter } from "@aws-amplify/ui-react-storage/browser";
-import { customElements } from "./customElements"; // customElements.tsx (JSX 포함 파일)
+import { customElements } from "./customElements"; // customElements.tsx (JSX 포함)
 import "@aws-amplify/ui-react-storage/styles.css";
 import config from "../amplify_outputs.json";
+
+// Next.js 클라이언트 전용 페이지일 경우, prerendering 방지를 위해 dynamic 설정을 추가할 수 있습니다.
+// export const dynamic = "force-dynamic";
 
 Amplify.configure(config);
 
 function Example() {
-  // createAmplifyAuthAdapter()에 defaultPrefixes 옵션을 전달하여 S3 prefix를 설정합니다.
+  // defaultPrefixes 옵션을 통해 S3의 기본 prefix들을 설정합니다.
   const authAdapter = createAmplifyAuthAdapter({
     options: {
       defaultPrefixes: [
@@ -24,11 +27,10 @@ function Example() {
     },
   });
 
-  // createStorageBrowser는 config와 elements 옵션을 받습니다.
-  // authAdapter는 내부적으로 사용되므로, StorageBrowser 컴포넌트의 prop으로 전달하지 않습니다.
+  // createStorageBrowser에는 config와 커스터마이징한 UI 요소를 전달합니다.
   const { StorageBrowser } = createStorageBrowser({
     config: config,
-    elements: customElements as any, // 타입 오류 우회를 위해 강제 캐스팅
+    elements: customElements as any, // 타입 오류 우회를 위해 as any 사용
   });
 
   return (
