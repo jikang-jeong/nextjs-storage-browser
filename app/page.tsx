@@ -4,22 +4,14 @@ import { Amplify } from "aws-amplify";
 import { signOut } from "aws-amplify/auth";
 import { Button, withAuthenticator } from "@aws-amplify/ui-react";
 import { createStorageBrowser, createAmplifyAuthAdapter } from "@aws-amplify/ui-react-storage/browser";
-import { customElements } from "./customElements"; // customElements.tsx
+import { customElements } from "./customElements"; // customElements.tsx (JSX 포함 파일)
 import "@aws-amplify/ui-react-storage/styles.css";
 import config from "../amplify_outputs.json";
 
 Amplify.configure(config);
 
-// 확장된 config 객체 (타입 우회를 위해 as any)
-const storageBrowserConfig = {
-  ...config,
-  listLocations: () => Promise.resolve([]),
-  getLocationCredentials: () => Promise.resolve({}),
-  region: config.auth?.aws_region || "us-east-1",
-  registerAuthListener: () => { return () => {}; },
-} as any;
-
 function Example() {
+  // createAmplifyAuthAdapter()에 defaultPrefixes 옵션을 전달하여 S3 prefix를 설정합니다.
   const authAdapter = createAmplifyAuthAdapter({
     options: {
       defaultPrefixes: [
@@ -32,10 +24,11 @@ function Example() {
     },
   });
 
-  // createStorageBrowser에 확장된 config 전달
+  // createStorageBrowser는 config와 elements 옵션을 받습니다.
+  // authAdapter는 내부적으로 사용되므로, StorageBrowser 컴포넌트의 prop으로 전달하지 않습니다.
   const { StorageBrowser } = createStorageBrowser({
-    config: storageBrowserConfig,
-    elements: customElements as any,
+    config: config,
+    elements: customElements as any, // 타입 오류 우회를 위해 강제 캐스팅
   });
 
   return (
@@ -43,7 +36,7 @@ function Example() {
       <Button marginBlockEnd="xl" size="small" onClick={() => signOut()}>
         Sign Out
       </Button>
-      <StorageBrowser authAdapter={authAdapter} />
+      <StorageBrowser />
     </>
   );
 }
