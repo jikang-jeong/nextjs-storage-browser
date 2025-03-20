@@ -11,7 +11,7 @@ import config from "../amplify_outputs.json";
 Amplify.configure(config);
 
 function Example() {
-  // 인증 어댑터 생성 (옵션 포함)
+  // defaultPrefixes를 createAmplifyAuthAdapter 옵션으로 지정합니다.
   const authAdapter = createAmplifyAuthAdapter({
     options: {
       defaultPrefixes: [
@@ -20,20 +20,12 @@ function Example() {
         "shared-folder-readwrite/",
         (identityId: string) => `protected-useronlyreadwritedelete/${identityId}/`,
         (identityId: string) => `private-useronlyreadwritedelete/${identityId}/`,
-      ],
-    },
+      ]
+    }
   });
 
-  // createStorageBrowser는 authAdapter를 받지 않고, listPrefixes만 받습니다.
-  const { StorageBrowser } = createStorageBrowser({
-    listPrefixes: [
-      "media-readwritedelete/",
-      "media-readonly/",
-      "shared-folder-readwrite/",
-      (identityId: string) => `protected-useronlyreadwritedelete/${identityId}/`,
-      (identityId: string) => `private-useronlyreadwritedelete/${identityId}/`,
-    ],
-  });
+  // createStorageBrowser는 추가 옵션 없이 호출합니다.
+  const { StorageBrowser } = createStorageBrowser({});
 
   return (
     <>
