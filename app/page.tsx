@@ -4,14 +4,14 @@ import { Amplify } from "aws-amplify";
 import { signOut } from "aws-amplify/auth";
 import { Button, withAuthenticator } from "@aws-amplify/ui-react";
 import { createStorageBrowser, createAmplifyAuthAdapter } from "@aws-amplify/ui-react-storage/browser";
-import { customElements } from "./customElements"; // customElements.tsx (JSX 포함된 파일)
+import { customElements } from "./customElements"; // customElements.tsx 파일 (JSX 포함된 파일)
 import "@aws-amplify/ui-react-storage/styles.css";
 import config from "../amplify_outputs.json";
 
 Amplify.configure(config);
 
 function Example() {
-  // defaultPrefixes를 createAmplifyAuthAdapter 옵션으로 지정합니다.
+  // authAdapter 생성 시 defaultPrefixes를 옵션으로 설정합니다.
   const authAdapter = createAmplifyAuthAdapter({
     options: {
       defaultPrefixes: [
@@ -20,20 +20,23 @@ function Example() {
         "shared-folder-readwrite/",
         (identityId: string) => `protected-useronlyreadwritedelete/${identityId}/`,
         (identityId: string) => `private-useronlyreadwritedelete/${identityId}/`,
-      ]
-    }
+      ],
+    },
   });
 
-  // createStorageBrowser는 추가 옵션 없이 호출합니다.
-  const { StorageBrowser } = createStorageBrowser({});
+  // createStorageBrowser에는 authAdapter.config를 필수로 전달합니다.
+  const { StorageBrowser } = createStorageBrowser({
+    config: authAdapter.config,
+    elements: customElements as any, // 타입 오류 우회를 위한 강제 캐스팅
+  });
 
   return (
     <>
       <Button marginBlockEnd="xl" size="small" onClick={() => signOut()}>
         Sign Out
       </Button>
-      {/* authAdapter와 customElements를 StorageBrowser의 prop으로 전달 */}
-      <StorageBrowser authAdapter={authAdapter} elements={customElements as any} />
+      {/* StorageBrowser 컴포넌트에는 authAdapter를 prop으로 전달 */}
+      <StorageBrowser authAdapter={authAdapter} />
     </>
   );
 }
